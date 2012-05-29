@@ -87,7 +87,7 @@ Another benefit is that you can safely override them by attaching event
 handlers directly to the widget elements, and stopping propagation.
 
 Styling the widgets
-===================
+-------------------
 
 The `<A>` element has `PREFIX-label` and `select-list` classes. The second
 class is used to identify the element in order to handle keyboard and mouse 
