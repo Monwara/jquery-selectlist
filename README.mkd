@@ -8,7 +8,9 @@ select lists), and can turn any input element into a select list widget.
 Installation
 ------------
 
-This plugin requires jquery-makefit in order to work correctly.
+This plugin requires 
+[jQuery makeFit](https://github.com/Monwara/jquery-makefit) in order to work 
+correctly.
 
 When used as an AMD module (e.g., via RequireJS), you can simply include
 jQuery, jquery-makefit, and this pluign, and the plugin should load the
