@@ -1,0 +1,40 @@
+{
+    "name": "jQuery selectList",
+    "version": "0.0.1",
+    "title": "jQuery.fn.select",
+    "author": {
+        "name": "Monwara LLC"
+        "url": "http://monwara.com/"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ],
+    "dependencies": {
+        "jquery": ">=1.7"
+    },
+    "description": "Drop-in replacement for select lists (drop-down boxes) that facilitates easier styling and possibly better UX.",
+    "keywords": [
+        "select",
+        "dropdown",
+        "form",
+        "input"
+    ],
+    "homepage": "https://github.com/Monwara/jquery-selectlist",
+    "maintainers": [
+        {
+            "name": "Branko Vukelic",
+            "email": "branko@monwara.com"
+            "url": "https://github.com/Monwara"
+        }
+    ],
+    "bugs": { 
+        "url": "https://github.com/Monwara/jquery-selectlist/issues",
+        "email": "branko@monwara.com"
+    },
+    "files": [
+        "select.js"
+    ]
+}

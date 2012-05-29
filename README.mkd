@@ -1,0 +1,145 @@
+jQuery selectList
+=================
+
+Widget plugin that replaces browser's native select lists (drop-down boxes).
+This plugin does not require any special markup (you can use your regular
+select lists), and can turn any input element into a select list widget.
+
+Installation
+------------
+
+This plugin requires jquery-makefit in order to work correctly.
+
+When used as an AMD module (e.g., via RequireJS), you can simply include
+jQuery, jquery-makefit, and this pluign, and the plugin should load the
+dependencies correctly.
+
+To use with script tag, simple include it after jquery and jquery-makefit.
+
+Basic usage
+-----------
+
+Below snippet converts all `<SELECT>` tags into jQuery selectList widgets:
+
+    $('select').select();
+
+Advanced usage
+--------------
+
+You can supply two paramters to the `.select()` method. The first parameter is
+an object containing configuration options. Second parameter is the default
+value. Default value is self-explanatory, but it should be noted that it will
+be coerced into string before it is set, as values for select lists in HTML
+are, by nature, strings.
+
+By default, this plugin will read the `<OPTION>` tags to determine which values
+and labels to use. You can override this by supplying the `opts` option:
+
+    var myCustomOpts = [
+      ['val1', 'label1'],
+      ['val2', 'label2'],
+      ['val3', 'label3']
+    ];
+
+    $('select').select({opts: myCustomOpts});
+
+With the above snippet, all `<SELECT>` elements on the page will be turned into
+jQuery selectList widgets that all have the same three options.
+
+By default, the class prefix for all jQuery selectList widgets is
+'jquery-select'. You can override this as well, by providing a `prefix` option:
+
+    $('select').select({prefix: 'my-select'});
+
+How it works
+------------
+
+The select widget consists of three elements, and a handful of global event
+handlers. The three elements are:
+
+ + hidden `<INPUT>` element which replaces the original widget
+ + `<A>` element which presents the widget's currently selected value, and
+   also serves as a vessel for keyboard interaction (focus, keypress, etc)
+ + `<DIV>` element that contains the actual list
+
+The `<DIV>` element contianing the list only becomes part of the DOM tree when
+the label (`<A>` element) gets focus. Otherwise, it is not hidden, but
+completely removed from the tree. This design decision was made in hopes of
+avoiding the DOM bloat.
+
+`.select()` call returns the `<INPUT>` element, and is thus chainable. If you
+ever need to reach the `<A>` element, you can use the data property on the
+`<INPUT>` element:
+
+    var mySelect = $('#mySelect').select();
+    mySelect.data('label');
+
+The hidden `<INPUT>` elements are always linked to a single label anchor.
+
+When the `<A>` element gets focus, the list container `<DIV>` is created and
+positioned next to it. You can then interact with the list items as you would
+with a normal select widget.
+
+All event handlers that enable interaction with any part of the selectList
+widget are mapped globally to the window object. In case you have many select
+widgets on the page, this should, at least in theory, be more memory efficient.
+Another benefit is that you can safely override them by attaching event
+handlers directly to the widget elements, and stopping propagation.
+
+Styling the widgets
+===================
+
+The `<A>` element has `PREFIX-label` and `select-list` classes. The second
+class is used to identify the element in order to handle keyboard and mouse 
+events.
+
+If the original widget had an `id` attribute, the `<A>` element will have the
+same `id` with `-label` suffix. For example, if your original `id` was
+'my-select', the new `id` will be `my-select-label`.
+
+__NOTE__: Although irrelevant to styling, the `<INPUT>` element inherits the
+original `id` of the widget, as well as the `name` attribute if any.
+
+The list container `<DIV>` has the class of `PREFIX-list`. Unlike the `<A>`
+element, it has no `id` attribute.
+
+The list item `<DIV>`s are contained directly within the container element, and
+they have `PREFIX-item` class. Additionally, currently selected element will
+also have a `selected` class. The `selected` class is currently not
+customizable, although we plan to implement an option for that as well.
+
+By default, the container `<DIV>` is inserted into `<BODY>`. This is currently
+not customizable (and we think there isn't much benefit in inserting it
+elsewhere). It will also have a `z-index` of 4,294,967,296. The `z-index` can
+be overridden via CSS but you must append `!important` to the rule, as the
+`z-index` rule is applied directly to the element. Generally, there should be
+no need to override the `z-index`, though.
+
+Bugs and feature requests
+-------------------------
+
+Feel free to submit bug reports and feature requests in our 
+[issue tracker](https://github.com/Monwara/jquery-selectlist/issues).
+
+License
+-------
+
+Copyright (c) 2012 Monwara LLC 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
