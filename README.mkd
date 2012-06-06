@@ -23,16 +23,16 @@ Basic usage
 
 Below snippet converts all `<SELECT>` tags into jQuery selectList widgets:
 
-    $('select').select();
+    $('select').selectList();
 
 Advanced usage
 --------------
 
-You can supply two paramters to the `.select()` method. The first parameter is
-an object containing configuration options. Second parameter is the default
+You can supply two paramters to the `.selectList()` method. The first parameter
+is an object containing configuration options. Second parameter is the default
 value. Default value is self-explanatory, but it should be noted that it will
 be coerced into string before it is set, as values for select lists in HTML
-are, by nature, strings.
+are, by nature, strings.  
 
 By default, this plugin will read the `<OPTION>` tags to determine which values
 and labels to use. You can override this by supplying the `opts` option:
@@ -43,7 +43,7 @@ and labels to use. You can override this by supplying the `opts` option:
       ['val3', 'label3']
     ];
 
-    $('select').select({opts: myCustomOpts});
+    $('select').selectList({opts: myCustomOpts});
 
 With the above snippet, all `<SELECT>` elements on the page will be turned into
 jQuery selectList widgets that all have the same three options.
@@ -51,7 +51,7 @@ jQuery selectList widgets that all have the same three options.
 By default, the class prefix for all jQuery selectList widgets is
 'jquery-select'. You can override this as well, by providing a `prefix` option:
 
-    $('select').select({prefix: 'my-select'});
+    $('select').selectList({prefix: 'my-select'});
 
 How it works
 ------------
@@ -69,11 +69,11 @@ the label (`<A>` element) gets focus. Otherwise, it is not hidden, but
 completely removed from the tree. This design decision was made in hopes of
 avoiding the DOM bloat.
 
-`.select()` call returns the `<INPUT>` element, and is thus chainable. If you
-ever need to reach the `<A>` element, you can use the data property on the
+`.selectList()` call returns the `<INPUT>` element, and is thus chainable. If
+you ever need to reach the `<A>` element, you can use the data property on the
 `<INPUT>` element:
 
-    var mySelect = $('#mySelect').select();
+    var mySelect = $('#mySelect').selectList();
     mySelect.data('label');
 
 The hidden `<INPUT>` elements are always linked to a single label anchor.

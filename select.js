@@ -208,7 +208,7 @@
     opts: null
   };
 
-  $.fn.select = function(opts, def) {
+  $.fn.selectList = function(opts, def) {
     return $(this).map(function(idx, el) {
 
       if (typeof opts !== 'object') {
