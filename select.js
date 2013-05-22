@@ -49,7 +49,7 @@
       }).join('');
 
       // Create the list element
-      var $list = $('<div class="' + opts.prefix + '-list">' + optsHTML + 
+      var $list = $('<div class="' + opts.prefix + '-list">' + optsHTML +
                     '</div>');
 
       // Store the list in data property
@@ -96,11 +96,19 @@
 
   });
 
+  // focus state boolean
+  var focused = false;
+
   // Handle click event on select list label
   $(window).on('click', 'a.select-list', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).focus();
+    if (!focused) {
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).focus();
+      focused = true;
+    } else {
+      return false;
+    }
   });
 
   // Handle blur event on select list label
@@ -117,6 +125,7 @@
       }
       $this.data('listelement').remove();
       $this.data('listelement', null);
+      focused = false;
     }, 150);
   });
 
@@ -149,7 +158,7 @@
     switch (key) {
 
       // down arrow - select next choice
-      case 40: 
+      case 40:
         if (!$list) {
           return $this.focus();
         }
@@ -266,9 +275,9 @@
         $input.attr('id', $el.attr('id'));
       }
       $el.replaceWith($input); // XXX: This doesn't work?
-      
+
       // Create label and insert after hidden input
-      var $label = $('<a href="JavaScript:void(0)" class="' + 
+      var $label = $('<a href="JavaScript:void(0)" class="' +
                  opts.prefix + '-label select-list"></a>');
       if ($el.attr('id')) {
         $label.attr('id', $el.attr('id') + '-label');
@@ -332,9 +341,9 @@
     // When linked control is changed, call the callback
     $(selector).change(function(e) {
       var res = callback(
-        $(this).val(), 
-        $label.data('val'), 
-        $label.data('label'), 
+        $(this).val(),
+        $label.data('val'),
+        $label.data('label'),
         $label.data('list'));
 
       $label.data('list', res[0]);
